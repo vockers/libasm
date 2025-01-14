@@ -1,11 +1,17 @@
 #include "libasm.h"
 
+#include <assert.h>
 #include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
     char *str = "Hello, World!";
-    printf("%zu\n", (size_t)str);
-    printf("ft_strlen(\"%s\") = %zu\n", str, ft_strlen(str));
+
+    assert(ft_strlen(str) == strlen(str));
+    assert(ft_strlen("A") == strlen("A"));
+    assert(ft_strlen("") == strlen(""));
+    assert(ft_strlen(NULL) == 0);
+
     return 0;
 }
