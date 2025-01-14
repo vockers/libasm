@@ -10,6 +10,10 @@ OBJECTS := $(patsubst $(SRC_DIR)/%.asm,$(OBJ_DIR)/%.o,$(SOURCES))
 
 all: $(NAME)
 
+test: all
+	$(CC) -o test test.c -L. -lasm
+	./test
+
 $(NAME): $(OBJECTS)
 	$(AR) $@ $^
 
@@ -25,4 +29,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
