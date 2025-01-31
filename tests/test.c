@@ -18,6 +18,19 @@ int main(void)
     assert(ft_strlen("") == strlen(""));
     assert(ft_strlen(NULL) == 0);
 
+    //
+    // Test ft_strcpy
+    //
+    char dest[100];
+    char* dest_ptr = ft_strcpy(dest, "Hello, World!");
+    assert(strcmp(dest, "Hello, World!") == 0);
+    assert(strlen(dest) == strlen("Hello, World!"));
+    assert(dest_ptr == dest);
+
+    dest_ptr = ft_strcpy(dest, "");
+    assert(strcmp(dest, "") == 0);
+    assert(strlen(dest) == strlen(""));
+    assert(dest_ptr == dest);
     
     //
     // Test ft_read
