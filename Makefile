@@ -11,7 +11,7 @@ OBJECTS := $(patsubst $(SRC_DIR)/%.asm,$(OBJ_DIR)/%.o,$(SOURCES))
 all: $(NAME)
 
 test: all
-	$(CC) -o test tests/test.c -L. -lasm
+	$(CC) -o test test.c -L. -lasm
 	./test
 
 $(NAME): $(OBJECTS)
