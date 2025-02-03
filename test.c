@@ -41,6 +41,19 @@ void test_ft_strcpy(void)
     assert(dest_ptr == dest);
 }
 
+void test_ft_strdup(void)
+{
+    char *src = "Hello World!";
+    char *dst = ft_strdup(src);
+    assert(ft_strcmp(src, dst) == 0);
+    assert(src != dst);
+
+    src = "";
+    dst = ft_strdup(src);
+    assert(ft_strcmp(src, dst) == 0);
+    assert(src != dst);
+}
+
 void test_ft_read()
 {
     // Create a temporary test file
@@ -116,6 +129,7 @@ int main(void)
     test_ft_strlen();
     test_ft_strcmp();
     test_ft_strcpy();
+    test_ft_strdup();
     test_ft_read();
     test_ft_write();
 
