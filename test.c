@@ -14,6 +14,19 @@ void test_ft_strlen(void)
     assert(ft_strlen(NULL) == 0);
 }
 
+void test_ft_strcmp(void)
+{
+    assert(ft_strcmp("Hello, World!", "Hello, World!") == 0);
+    assert(ft_strcmp("Hello, World!", "Hello, World") == 33);
+    assert(ft_strcmp("Hello, World", "Hello, World!") == -33);
+    assert(ft_strcmp("Hello, World!", "Hello, World!!") == -33);
+    assert(ft_strcmp("Hello, World!!", "Hello, World!") == 33);
+    assert(ft_strcmp("", "") == 0);
+    assert(ft_strcmp("A", "A") == 0);
+    assert(ft_strcmp("A", "B") == -1);
+    assert(ft_strcmp("B", "A") == 1);
+}
+
 void test_ft_strcpy(void)
 {
     char dest[100];
@@ -101,6 +114,7 @@ void test_ft_write()
 int main(void)
 {
     test_ft_strlen();
+    test_ft_strcmp();
     test_ft_strcpy();
     test_ft_read();
     test_ft_write();
