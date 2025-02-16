@@ -1,7 +1,6 @@
-global ft_strcpy
-
 section .text
 
+global ft_strcpy
 ft_strcpy:
     mov rax, rdi ; set return value to rdi (dst)
 

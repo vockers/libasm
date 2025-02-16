@@ -1,10 +1,10 @@
-global ft_strdup
 extern ft_strlen
 extern ft_strcpy
 extern malloc
 
 section .text
 
+global ft_strdup
 ft_strdup:
     push rdi              ; save source string
     call ft_strlen        ; get length of source string, `str` is in rdi

@@ -1,7 +1,6 @@
-global ft_strlen
-
 section .text
 
+global ft_strlen
 ft_strlen:
     xor rax, rax  ; initialize rax to 0
     test rdi, rdi ; check if rdi (*str) is null

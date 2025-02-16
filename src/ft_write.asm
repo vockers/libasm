@@ -1,14 +1,14 @@
 extern __errno_location
-global ft_write
 
 section .text
 
+global ft_write
 ft_write:
-    mov rax, 1 ; set system call number to 1 (write)
-    syscall    ; write call: `fd`, `buf`, `count` are in: rdi, rsi, rdx
-    cmp rax, 0 ; check if return value of syscall (rax) is negative
-    jl .error  ; jump to .error on error (rax is negative)
-    ret        ; return number of bytes written
+    mov rax, 1     ; set system call number to 1 (write)
+    syscall        ; write call: `fd`, `buf`, `count` are in: rdi, rsi, rdx
+    cmp rax, -4095 ; check if return value of syscall (rax) is between -1 and -4095
+    jae .error     ; jump to .error on error (rax is between -1 and -4095)
+    ret            ; return number of bytes written
 
 .error:
     neg rax                         ; get absolute value of syscall return

@@ -1,7 +1,6 @@
-global ft_strcmp
-
 section .text
 
+global ft_strcmp
 ft_strcmp:
     xor rax, rax ; initialize rax to 0
 
