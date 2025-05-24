@@ -13,6 +13,6 @@ ft_strcpy:
     inc rsi            ; move to the next byte in src
     jmp .loop          ; repeat the loop
     
-.exit
+.exit:
     mov byte [rdi], 0 ; null-terminate the string
     ret
