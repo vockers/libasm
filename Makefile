@@ -17,6 +17,7 @@ OBJECTS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.asm=.o))
 
 BONUS_SOURCES := \
 	ft_atoi_base_bonus.asm \
+	ft_list_push_front_bonus.asm \
 
 BONUS_OBJECTS := $(addprefix $(OBJ_DIR)/, $(BONUS_SOURCES:.asm=.o))
 

@@ -77,9 +77,32 @@ void test_ft_atoi_base(void)
     TEST_ATOI_BASE("52", "01234567", 42);
 }
 
+void test_ft_list_push_front(void)
+{
+    t_list lst;
+    lst.data = "First";
+    lst.next = NULL;
+
+    t_list *head = &lst;
+    ft_list_push_front(&head, "Second");
+    assert(strcmp(head->data, "Second") == 0);
+    assert(head->next == &lst);
+    assert(strcmp(head->next->data, "First") == 0);
+    ft_list_push_front(&head, "Third");
+    assert(strcmp(head->data, "Third") == 0);
+    assert(strcmp(head->next->data, "Second") == 0);
+    assert(head->next->next == &lst);
+    ft_list_push_front(&head, "Fourth");
+    assert(strcmp(head->data, "Fourth") == 0);
+    assert(strcmp(head->next->data, "Third") == 0);
+    assert(strcmp(head->next->next->data, "Second") == 0);
+    assert(head->next->next->next == &lst);
+}
+
 int main(void)
 {
     test_ft_atoi_base();
+    test_ft_list_push_front();
 
     return 0;
 }
