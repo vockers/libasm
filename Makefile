@@ -12,15 +12,11 @@ SOURCES := \
 	ft_write.asm \
 	ft_read.asm \
 	ft_strdup.asm \
+	ft_atoi_base.asm \
+	ft_list_push_front.asm \
+	ft_list_size.asm \
 
 OBJECTS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.asm=.o))
-
-BONUS_SOURCES := \
-	ft_atoi_base_bonus.asm \
-	ft_list_push_front_bonus.asm \
-	ft_list_size_bonus.asm \
-
-BONUS_OBJECTS := $(addprefix $(OBJ_DIR)/, $(BONUS_SOURCES:.asm=.o))
 
 all: $(NAME)
 
@@ -30,13 +26,6 @@ test: all
 
 $(NAME): $(OBJECTS)
 	$(AR) $@ $^
-
-test_bonus: bonus
-	$(CC) -o test_bonus test_bonus.c -L. -lasm -z noexecstack
-	./test_bonus
-
-bonus: $(OBJECTS) $(BONUS_OBJECTS)
-	$(AR) $(NAME) $^
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.asm
 	@mkdir -p $(OBJ_DIR)
