@@ -1,7 +1,7 @@
 section .text
 
 global ft_atoi_base
-ft_atoi_base:
+ft_atoi_base: ; rdi = *str, rsi = *base
     xor rax, rax  ; Initialize result to 0
     test rdi, rdi ; check if rdi (*str) is null
     jz .exit      ; if it is, return 0
@@ -26,19 +26,19 @@ ft_atoi_base:
     ; check if character is a valid base character (not a whitespace or '-' or '+')
     cmp cl, ' ' ; Check if it's a space
     je .exit    ; If it is, it's invalid
-    cmp cl, 9   ; Check for tab
+    cmp cl, 9   ; tab
     je .exit    ;
-    cmp cl, 10  ; Check for newline
+    cmp cl, 10  ; newline
     je .exit    ;
-    cmp cl, 11  ; Check for vertical tab
+    cmp cl, 11  ; vertical tab
     je .exit    ;
-    cmp cl, 12  ; Check for form feed
+    cmp cl, 12  ; form feed
     je .exit    ;
-    cmp cl, 13  ; Check for carriage return
+    cmp cl, 13  ; carriage return
     je .exit    ;
-    cmp cl, '-' ; Check for minus sign
+    cmp cl, '-' ; minus sign
     je .exit    ;
-    cmp cl, '+' ; Check for plus sign
+    cmp cl, '+' ; plus sign
     je .exit    ;
 
     inc r8             ; Increment base length

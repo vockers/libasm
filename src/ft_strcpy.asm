@@ -1,12 +1,12 @@
 section .text
 
 global ft_strcpy
-ft_strcpy:
+ft_strcpy: ; rdi = *dst, rsi = *src
     mov rax, rdi ; set return value to rdi (dst)
 
 .loop:
     cmp byte [rsi], 0  ; check if the current byte is null (end of string)
-    jz .exit           ; if it is, return rax (dst)
+    jz .exit
     mov dl, [rsi]      ; copy the current byte from src to dst
     mov byte [rdi], dl ;
     inc rdi            ; move to the next byte in dst

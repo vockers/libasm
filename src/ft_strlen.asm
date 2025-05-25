@@ -1,10 +1,10 @@
 section .text
 
 global ft_strlen
-ft_strlen:
+ft_strlen: ; rdi = *str
     xor rax, rax  ; initialize rax to 0
     test rdi, rdi ; check if rdi (*str) is null
-    jz .exit      ; if it is, return 0
+    jz .exit
 
 .loop:
     cmp byte [rdi], 0 ; check if the current byte is null (end of string)

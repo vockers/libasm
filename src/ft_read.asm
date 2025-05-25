@@ -3,11 +3,11 @@ extern __errno_location
 section .text
 
 global ft_read
-ft_read:
+ft_read: ; rdi = fd, rsi = buf, rdx = count
     xor rax, rax   ; set system call number to 0 (read)
     syscall        ; read call: `fd`, `buf`, `count` are in: rdi, rsi, rdx
     cmp rax, -4095 ; check if return value of syscall (rax) is between -1 and -4095
-    jae .error     ; jump to .error on error (rax is between -1 and -4095)
+    jae .error
     ret            ; return number of bytes read
 
 .error:
