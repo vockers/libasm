@@ -1,3 +1,5 @@
+%include "src/libasm.asm"
+
 section .text
 
 global ft_strlen
@@ -7,11 +9,11 @@ ft_strlen: ; rdi = *str
     jz .exit
 
 .loop:
-    cmp byte [rdi], 0 ; check if the current byte is null (end of string)
-    jz .exit          ; if it is, return rax (length of string)
-    inc rdi           ; move to the next byte
-    inc rax           ; increment the length of the string
-    jmp .loop         ; repeat the loop
+    cmp byte [rdi], NULL ; check if the current byte is null terminator
+    jz .exit             ; if it is, return rax (length of string)
+    inc rdi              ; move to the next byte
+    inc rax              ; increment the length of the string
+    jmp .loop            ; repeat the loop
 
 .exit:
     ret
