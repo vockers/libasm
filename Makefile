@@ -15,6 +15,7 @@ SOURCES := \
 	ft_atoi_base.asm \
 	ft_list_push_front.asm \
 	ft_list_size.asm \
+	ft_list_sort.asm \
 
 OBJECTS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.asm=.o))
 

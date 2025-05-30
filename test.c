@@ -224,6 +224,42 @@ void test_ft_list(void)
     assert(strcmp(head->next->next->data, "Second") == 0);
     assert(head->next->next->next == &lst);
     assert(ft_list_size(head) == 4);
+
+    ft_list_sort(&head, strcmp);
+    assert(strcmp(head->data, "First") == 0);
+    assert(strcmp(head->next->data, "Fourth") == 0);
+    assert(strcmp(head->next->next->data, "Second") == 0);
+    assert(strcmp(head->next->next->next->data, "Third") == 0);
+    assert(ft_list_size(head) == 4);
+}
+
+void test_ft_list_sort(void)
+{
+    {
+        t_list *head = NULL;
+        ft_list_push_front(&head, "C");
+        ft_list_push_front(&head, "A");
+        ft_list_push_front(&head, "B");
+
+        ft_list_sort(&head, strcmp);
+        
+        assert(strcmp(head->data, "A") == 0);
+        assert(strcmp(head->next->data, "B") == 0);
+        assert(strcmp(head->next->next->data, "C") == 0);
+        assert(ft_list_size(head) == 3);
+    }
+
+    {
+        t_list *head = NULL;
+        ft_list_sort(&head, strcmp);
+        ft_list_push_front(&head, "Z");
+        ft_list_sort(&head, strcmp);
+        assert(strcmp(head->data, "Z") == 0);
+        ft_list_push_front(&head, "A");
+        ft_list_sort(&head, strcmp);
+        assert(strcmp(head->data, "A") == 0);
+        assert(strcmp(head->next->data, "Z") == 0);
+    }
 }
 
 int main(void)
@@ -236,6 +272,7 @@ int main(void)
     test_ft_write();
     test_ft_atoi_base();
     test_ft_list();
+    test_ft_list_sort();
 
     return 0;
 }
