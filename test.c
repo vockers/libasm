@@ -5,12 +5,24 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <stdlib.h>
 
 #define TEST_ATOI_BASE(str, base, expected) \
     { \
         int result = ft_atoi_base(str, base); \
         assert(result == expected); \
     } \
+
+void free_list(t_list *head)
+{
+    t_list *tmp;
+    while (head)
+    {
+        tmp = head;
+        head = head->next;
+        free(tmp);
+    }
+}
 
 void test_ft_strlen(void)
 {
@@ -53,11 +65,13 @@ void test_ft_strdup(void)
     char *dst = ft_strdup(src);
     assert(ft_strcmp(src, dst) == 0);
     assert(src != dst);
+    free(dst);
 
     src = "";
     dst = ft_strdup(src);
     assert(ft_strcmp(src, dst) == 0);
     assert(src != dst);
+    free(dst);
 }
 
 void test_ft_read()
@@ -199,30 +213,24 @@ void test_ft_list(void)
 {
     assert(ft_list_size(NULL) == 0);
 
-    t_list lst;
-    lst.data = "First";
-    lst.next = NULL;
-
-    t_list *head = &lst;
+    t_list *head = NULL;
+    ft_list_push_front(&head, strdup("First"));
     assert(ft_list_size(head) == 1);
-    ft_list_push_front(&head, "Second");
+    ft_list_push_front(&head, strdup("Second"));
     assert(strcmp(head->data, "Second") == 0);
-    assert(head->next == &lst);
     assert(strcmp(head->next->data, "First") == 0);
     assert(ft_list_size(head) == 2);
 
-    ft_list_push_front(&head, "Third");
+    ft_list_push_front(&head, strdup("Third"));
     assert(strcmp(head->data, "Third") == 0);
     assert(strcmp(head->next->data, "Second") == 0);
     assert(strcmp(head->next->next->data, "First") == 0);
-    assert(head->next->next == &lst);
     assert(ft_list_size(head) == 3);
 
-    ft_list_push_front(&head, "Fourth");
+    ft_list_push_front(&head, strdup("Fourth"));
     assert(strcmp(head->data, "Fourth") == 0);
     assert(strcmp(head->next->data, "Third") == 0);
     assert(strcmp(head->next->next->data, "Second") == 0);
-    assert(head->next->next->next == &lst);
     assert(ft_list_size(head) == 4);
 
     ft_list_sort(&head, strcmp);
@@ -231,6 +239,22 @@ void test_ft_list(void)
     assert(strcmp(head->next->next->data, "Second") == 0);
     assert(strcmp(head->next->next->next->data, "Third") == 0);
     assert(ft_list_size(head) == 4);
+
+    ft_list_remove_if(&head, "Second", strcmp, free);
+    assert(strcmp(head->data, "First") == 0);
+    assert(strcmp(head->next->data, "Fourth") == 0);
+    assert(strcmp(head->next->next->data, "Third") == 0);
+    assert(ft_list_size(head) == 3);
+    ft_list_remove_if(&head, "First", strcmp, free);
+    assert(strcmp(head->data, "Fourth") == 0);
+    assert(strcmp(head->next->data, "Third") == 0);
+    assert(ft_list_size(head) == 2);
+    ft_list_remove_if(&head, "Fourth", strcmp, free);
+    assert(strcmp(head->data, "Third") == 0);
+    assert(ft_list_size(head) == 1);
+    ft_list_remove_if(&head, "Third", strcmp, free);
+    assert(head == NULL);
+    assert(ft_list_size(head) == 0);
 }
 
 void test_ft_list_sort(void)
@@ -247,6 +271,8 @@ void test_ft_list_sort(void)
         assert(strcmp(head->next->data, "B") == 0);
         assert(strcmp(head->next->next->data, "C") == 0);
         assert(ft_list_size(head) == 3);
+
+        free_list(head);
     }
 
     {
@@ -259,6 +285,8 @@ void test_ft_list_sort(void)
         ft_list_sort(&head, strcmp);
         assert(strcmp(head->data, "A") == 0);
         assert(strcmp(head->next->data, "Z") == 0);
+
+        free_list(head);
     }
 }
 

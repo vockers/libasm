@@ -16,13 +16,14 @@ SOURCES := \
 	ft_list_push_front.asm \
 	ft_list_size.asm \
 	ft_list_sort.asm \
+	ft_list_remove_if.asm \
 
 OBJECTS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.asm=.o))
 
 all: $(NAME)
 
 test: all
-	$(CC) -o test test.c -L. -lasm -z noexecstack
+	$(CC) -o test test.c -L. -lasm -z noexecstack -g
 	./test
 
 $(NAME): $(OBJECTS)
